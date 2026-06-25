@@ -33,9 +33,7 @@
 
             <select id="payer">
               <option value="Amit">Amit</option>
-
               <option value="Rahul">Rahul</option>
-
               <option value="Sneha">Sneha</option>
             </select>
           </div>
@@ -45,7 +43,15 @@
           <div class="members-section">
             <div class="member-card">
               <div class="member-top">
-                <span>Amit</span>
+                <div class="member-left">
+                  <input
+                    type="checkbox"
+                    class="member-check"
+                    data-name="Amit"
+                  />
+
+                  <span>Amit</span>
+                </div>
 
                 <span id="amitPercent">0%</span>
               </div>
@@ -57,12 +63,21 @@
                 value="0"
                 class="slider"
                 data-name="Amit"
+                disabled
               />
             </div>
 
             <div class="member-card">
               <div class="member-top">
-                <span>Rahul</span>
+                <div class="member-left">
+                  <input
+                    type="checkbox"
+                    class="member-check"
+                    data-name="Rahul"
+                  />
+
+                  <span>Rahul</span>
+                </div>
 
                 <span id="rahulPercent">0%</span>
               </div>
@@ -74,12 +89,21 @@
                 value="0"
                 class="slider"
                 data-name="Rahul"
+                disabled
               />
             </div>
 
             <div class="member-card">
               <div class="member-top">
-                <span>Sneha</span>
+                <div class="member-left">
+                  <input
+                    type="checkbox"
+                    class="member-check"
+                    data-name="Sneha"
+                  />
+
+                  <span>Sneha</span>
+                </div>
 
                 <span id="snehaPercent">0%</span>
               </div>
@@ -91,6 +115,7 @@
                 value="0"
                 class="slider"
                 data-name="Sneha"
+                disabled
               />
             </div>
           </div>

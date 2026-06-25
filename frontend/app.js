@@ -2,6 +2,8 @@ const API_URL = "http://127.0.0.1:5000";
 
 const sliders = document.querySelectorAll(".slider");
 
+const memberChecks = document.querySelectorAll(".member-check");
+
 const totalPercentage = document.getElementById("totalPercentage");
 
 const submitBtn = document.getElementById("submitBtn");
@@ -36,10 +38,58 @@ sliders.forEach((slider) => {
   });
 });
 
+memberChecks.forEach((check) => {
+  check.addEventListener("change", (e) => {
+    const name = e.target.dataset.name;
+
+    const slider = document.querySelector(`.slider[data-name="${name}"]`);
+
+    if (e.target.checked) {
+      slider.disabled = false;
+    } else {
+      slider.disabled = true;
+
+      slider.value = 0;
+
+      members[name] = 0;
+    }
+
+    updateUI();
+  });
+});
+
 equalSplitBtn.addEventListener("click", () => {
-  members.Amit = 33.33;
-  members.Rahul = 33.33;
-  members.Sneha = 33.34;
+  const activeMembers = [];
+
+  memberChecks.forEach((check) => {
+    if (check.checked) {
+      activeMembers.push(check.dataset.name);
+    }
+  });
+
+  if (activeMembers.length === 0) {
+    return;
+  }
+
+  const equalShare = 100 / activeMembers.length;
+
+  Object.keys(members).forEach((name) => {
+    if (activeMembers.includes(name)) {
+      members[name] = Number(equalShare.toFixed(2));
+    } else {
+      members[name] = 0;
+    }
+  });
+
+  const totalAssigned = equalShare * activeMembers.length;
+
+  const difference = 100 - totalAssigned;
+
+  if (difference !== 0) {
+    const lastMember = activeMembers[activeMembers.length - 1];
+
+    members[lastMember] += difference;
+  }
 
   sliders.forEach((slider) => {
     const name = slider.dataset.name;
@@ -55,11 +105,14 @@ personFilter.addEventListener("change", () => {
 });
 
 function updateUI() {
-  document.getElementById("amitPercent").innerText = members.Amit + "%";
+  document.getElementById("amitPercent").innerText =
+    Number(members.Amit).toFixed(2) + "%";
 
-  document.getElementById("rahulPercent").innerText = members.Rahul + "%";
+  document.getElementById("rahulPercent").innerText =
+    Number(members.Rahul).toFixed(2) + "%";
 
-  document.getElementById("snehaPercent").innerText = members.Sneha + "%";
+  document.getElementById("snehaPercent").innerText =
+    Number(members.Sneha).toFixed(2) + "%";
 
   const total =
     Number(members.Amit) + Number(members.Rahul) + Number(members.Sneha);
@@ -130,10 +183,10 @@ async function loadBalances() {
 
   if (balances.length === 0) {
     balancesContainer.innerHTML = `
-            <div class="balance-item">
-                Everyone is settled up
-            </div>
-        `;
+      <div class="balance-item">
+        Everyone is settled up
+      </div>
+    `;
 
     return;
   }
@@ -144,10 +197,10 @@ async function loadBalances() {
     div.classList.add("balance-item");
 
     div.innerHTML = `
-            ${item.debtor} owes
-            ${item.creditor}
-            ₹${item.amount}
-        `;
+      ${item.debtor} owes
+      ${item.creditor}
+      ₹${item.amount}
+    `;
 
     balancesContainer.appendChild(div);
   });
@@ -162,10 +215,10 @@ async function loadHistory() {
 
   if (expenses.length === 0) {
     historyContainer.innerHTML = `
-            <div class="empty-state">
-                No expenses yet
-            </div>
-        `;
+      <div class="empty-state">
+        No expenses yet
+      </div>
+    `;
 
     return;
   }
@@ -198,39 +251,39 @@ async function loadHistory() {
     }
 
     div.innerHTML = `
-            <strong>${item.description}</strong>
+      <strong>${item.description}</strong>
 
-            <div>
-                ${item.debtor} owes
-                ${item.payer}
-                ₹${item.amount}
-            </div>
+      <div>
+        ${item.debtor} owes
+        ${item.payer}
+        ₹${item.amount}
+      </div>
 
-            <div class="action-buttons">
+      <div class="action-buttons">
 
-                <button
-                    class="settle-btn"
-                    onclick="settleDebt(${item.id})"
-                    ${item.settled === 1 ? "disabled" : ""}
-                >
-                    ${item.settled === 1 ? "Settled" : "Mark as Settled"}
-                </button>
+        <button
+          class="settle-btn"
+          onclick="settleDebt(${item.id})"
+          ${item.settled === 1 ? "disabled" : ""}
+        >
+          ${item.settled === 1 ? "Settled" : "Mark as Settled"}
+        </button>
 
-                ${
-                  item.settled === 1
-                    ? `
-                    <button
-                        class="delete-btn"
-                        onclick="deleteDebt(${item.id})"
-                    >
-                        Delete Record
-                    </button>
-                    `
-                    : ""
-                }
+        ${
+          item.settled === 1
+            ? `
+            <button
+              class="delete-btn"
+              onclick="deleteDebt(${item.id})"
+            >
+              Delete Record
+            </button>
+          `
+            : ""
+        }
 
-            </div>
-        `;
+      </div>
+    `;
 
     historyContainer.appendChild(div);
   });
@@ -267,6 +320,12 @@ function clearForm() {
 
   sliders.forEach((slider) => {
     slider.value = 0;
+
+    slider.disabled = true;
+  });
+
+  memberChecks.forEach((check) => {
+    check.checked = false;
   });
 
   updateUI();

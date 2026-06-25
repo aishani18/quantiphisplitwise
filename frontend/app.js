@@ -71,24 +71,19 @@ equalSplitBtn.addEventListener("click", () => {
     return;
   }
 
-  const equalShare = 100 / activeMembers.length;
-
   Object.keys(members).forEach((name) => {
-    if (activeMembers.includes(name)) {
-      members[name] = Number(equalShare.toFixed(2));
-    } else {
-      members[name] = 0;
-    }
+    members[name] = 0;
   });
 
-  const totalAssigned = equalShare * activeMembers.length;
-
-  const difference = 100 - totalAssigned;
-
-  if (difference !== 0) {
-    const lastMember = activeMembers[activeMembers.length - 1];
-
-    members[lastMember] += difference;
+  if (activeMembers.length === 1) {
+    members[activeMembers[0]] = 100;
+  } else if (activeMembers.length === 2) {
+    members[activeMembers[0]] = 50;
+    members[activeMembers[1]] = 50;
+  } else if (activeMembers.length === 3) {
+    members[activeMembers[0]] = 33.33;
+    members[activeMembers[1]] = 33.33;
+    members[activeMembers[2]] = 33.34;
   }
 
   sliders.forEach((slider) => {
@@ -122,7 +117,7 @@ function updateUI() {
   const hasParticipant =
     members.Amit > 0 || members.Rahul > 0 || members.Sneha > 0;
 
-  submitBtn.disabled = total.toFixed(2) !== "100.00" || !hasParticipant;
+  submitBtn.disabled = Math.abs(total - 100) > 0.01 || !hasParticipant;
 }
 
 submitBtn.addEventListener("click", async () => {

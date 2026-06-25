@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Split Ledger</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div class="left-panel">
+        <div class="form-card">
+          <h1>Shared Expense Ledger</h1>
+
+          <div class="input-group">
+            <label>Expense Description</label>
+
+            <input
+              type="text"
+              id="description"
+              placeholder="Dinner, Hotel, Cab"
+            />
+          </div>
+
+          <div class="input-group">
+            <label>Total Amount</label>
+
+            <input type="number" id="amount" placeholder="0" />
+          </div>
+
+          <div class="input-group">
+            <label>Payer</label>
+
+            <select id="payer">
+              <option value="Amit">Amit</option>
+
+              <option value="Rahul">Rahul</option>
+
+              <option value="Sneha">Sneha</option>
+            </select>
+          </div>
+
+          <button id="equalSplitBtn" class="equal-btn">Split Equally</button>
+
+          <div class="members-section">
+            <div class="member-card">
+              <div class="member-top">
+                <span>Amit</span>
+
+                <span id="amitPercent">0%</span>
+              </div>
+
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                class="slider"
+                data-name="Amit"
+              />
+            </div>
+
+            <div class="member-card">
+              <div class="member-top">
+                <span>Rahul</span>
+
+                <span id="rahulPercent">0%</span>
+              </div>
+
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                class="slider"
+                data-name="Rahul"
+              />
+            </div>
+
+            <div class="member-card">
+              <div class="member-top">
+                <span>Sneha</span>
+
+                <span id="snehaPercent">0%</span>
+              </div>
+
+              <input
+                type="range"
+                min="0"
+                max="100"
+                value="0"
+                class="slider"
+                data-name="Sneha"
+              />
+            </div>
+          </div>
+
+          <div class="total-box">
+            Total Split:
+            <span id="totalPercentage">0%</span>
+          </div>
+
+          <button id="submitBtn" disabled>Add Expense</button>
+        </div>
+      </div>
+
+      <div class="right-panel">
+        <div class="balance-card">
+          <h2>Net Balances</h2>
+
+          <div id="balancesContainer">
+            <div class="empty-state">No balances yet</div>
+          </div>
+        </div>
+
+        <div class="history-card">
+          <div class="history-header">
+            <h2>Expense History</h2>
+
+            <select id="personFilter">
+              <option value="All">All Records</option>
+
+              <option value="Amit">Amit</option>
+
+              <option value="Rahul">Rahul</option>
+
+              <option value="Sneha">Sneha</option>
+            </select>
+          </div>
+
+          <div id="historyContainer">
+            <div class="empty-state">No expenses yet</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

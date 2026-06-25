@@ -1,0 +1,196 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #111827;
+  color: white;
+  min-height: 100vh;
+}
+
+.container {
+  display: flex;
+  gap: 30px;
+  padding: 40px;
+}
+
+.left-panel {
+  flex: 1;
+}
+
+.right-panel {
+  width: 420px;
+}
+
+.form-card,
+.balance-card,
+.history-card {
+  background: #1f2937;
+  border-radius: 18px;
+  padding: 24px;
+}
+
+.history-card {
+  margin-top: 30px;
+}
+
+h1 {
+  font-size: 32px;
+  margin-bottom: 24px;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+.input-group {
+  margin-bottom: 20px;
+}
+
+.input-group label {
+  display: block;
+  margin-bottom: 8px;
+  color: #d1d5db;
+}
+
+.input-group input,
+.input-group select {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  border-radius: 10px;
+  background: #374151;
+  color: white;
+  font-size: 16px;
+}
+
+.members-section {
+  margin-top: 30px;
+}
+
+.member-card {
+  background: #374151;
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 18px;
+}
+
+.member-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.slider {
+  width: 100%;
+}
+
+.total-box {
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+button {
+  width: 100%;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 16px;
+  color: white;
+  cursor: pointer;
+}
+
+button:disabled {
+  background: #6b7280;
+  cursor: not-allowed;
+}
+
+#submitBtn {
+  margin-top: 24px;
+  background: #10b981;
+}
+
+.equal-btn {
+  background: #2563eb;
+  margin-top: 10px;
+}
+
+.balance-item {
+  background: #374151;
+  padding: 18px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  line-height: 1.5;
+}
+
+.history-item {
+  background: #374151;
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 14px;
+}
+
+.history-item strong {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.settle-btn {
+  background: #f59e0b;
+  padding: 10px;
+  font-size: 14px;
+}
+
+.delete-btn {
+  background: #7c3aed;
+  padding: 10px;
+  font-size: 14px;
+  transition: 0.2s;
+}
+
+.delete-btn:hover {
+  background: #6d28d9;
+}
+
+.settled {
+  opacity: 0.5;
+}
+
+.empty-state {
+  color: #9ca3af;
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#personFilter {
+  background: #374151;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+@media (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .right-panel {
+    width: 100%;
+  }
+}
